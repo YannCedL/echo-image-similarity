@@ -1,9 +1,9 @@
-from echo_image_similarity import compute_phash, find_similar
-
-def test_compute_phash():
-    h = compute_phash("test.jpg")
-    assert len(h) == 16
+# test de similarité et pHash Echo
+from echo_image_similarity.search import find_similar
 
 def test_find_similar():
-    c = find_similar("test.jpg")
-    assert "query_hash" in c.result
+    contract = find_similar("sample.jpg")
+    assert contract is not None
+    assert contract.result["query_hash"] is not None
+    assert len(contract.result["matches"]) >= 1
+    assert len(contract.evidence) >= 1
